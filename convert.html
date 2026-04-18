@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Web2App Converter - Ubah Website jadi APK Android</title>
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+      border-radius: 2.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.4);
+      width: 100%;
+      max-width: 720px;
+      transition: all 0.3s ease;
+    }
+
+    .container {
+      padding: 2rem 2rem 2.5rem;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(120deg, #ffffff, #c084fc, #60a5fa);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .badge {
+      background: rgba(96, 165, 250, 0.2);
+      border-radius: 100px;
+      padding: 0.2rem 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #93c5fd;
+      border: 1px solid rgba(96, 165, 250, 0.4);
+    }
+
+    .subhead {
+      color: #cbd5e1;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      border-left: 3px solid #8b5cf6;
+      padding-left: 1rem;
+    }
+
+    .input-group {
+      margin-bottom: 1.8rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+    }
+
+    .url-input-wrapper {
+      display: flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: 1.2rem;
+      border: 1px solid #334155;
+      transition: all 0.2s;
+      overflow: hidden;
+    }
+
+    .url-input-wrapper:focus-within {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+    }
+
+    .url-icon {
+      padding: 0 1rem;
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+
+    input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 1rem 0;
+      font-size: 1rem;
+      color: #f1f5f9;
+      outline: none;
+      font-family: 'Inter', monospace;
+    }
+
+    input::placeholder {
+      color: #475569;
+      font-weight: 400;
+    }
+
+    .url-hint {
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .generate-btn {
+      width: 100%;
+      background: linear-gradient(95deg, #7c3aed, #3b82f6);
+      border: none;
+      padding: 1rem;
+      border-radius: 1.5rem;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 20px -6px rgba(59, 130, 246, 0.4);
+    }
+
+    .generate-btn:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(95deg, #8b5cf6, #2563eb);
+      box-shadow: 0 12px 25px -8px #3b82f6;
+    }
+
+    .generate-btn:active {
+      transform: translateY(1px);
+    }
+
+    .generate-btn:disabled {
+      opacity: 0.6;
+      transform: none;
+      cursor: not-allowed;
+      filter: grayscale(0.1);
+    }
+
+    .status-card {
+      margin-top: 2rem;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 1.5rem;
+      padding: 1.2rem 1.5rem;
+      border-left: 4px solid #3b82f6;
+      transition: all 0.2s;
+    }
+
+    .status-title {
+      font-weight: 600;
+      color: #e0e7ff;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status-message {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      word-break: break-word;
+    }
+
+    .progress-bar {
+      margin-top: 0.8rem;
+      height: 6px;
+      background: #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #a855f7, #3b82f6);
+      border-radius: 10px;
+      transition: width 0.25s ease;
+    }
+
+    .download-area {
+      margin-top: 1rem;
+      background: rgba(34, 197, 94, 0.1);
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .download-link {
+      background: #22c55e;
+      padding: 0.6rem 1.2rem;
+      border-radius: 2rem;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s;
+    }
+
+    .download-link:hover {
+      background: #16a34a;
+    }
+
+    .info-note {
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      text-align: center;
+      color: #5b6e8c;
+      border-top: 1px solid #2d3a4e;
+      padding-top: 1.5rem;
+    }
+
+    .error-text {
+      color: #f87171;
+    }
+
+    i.fa, i.far, i.fas {
+      pointer-events: none;
+    }
+
+    @media (max-width: 550px) {
+      .container {
+        padding: 1.5rem;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="glass-card">
+  <div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+      <h1>
+        <i class="fas fa-code-branch"></i> Web2App
+      </h1>
+      <span class="badge"><i class="fas fa-robot"></i> PWA Builder Engine</span>
+    </div>
+    <div class="subhead">
+      Ubah website favoritmu menjadi aplikasi Android (.apk) secara instan. Masukkan URL, klik build, unduh APK.
+    </div>
+
+    <div class="input-group">
+      <label><i class="fas fa-link"></i> Alamat Website</label>
+      <div class="url-input-wrapper">
+        <span class="url-icon"><i class="fas fa-globe"></i></span>
+        <input type="url" id="websiteUrl" placeholder="https://namasitus.com atau https://example.com" value="https://">
+        <span style="padding-right: 1rem; color:#475569;"> </span>
+      </div>
+      <div class="url-hint">
+        <i class="fas fa-info-circle"></i> Pastikan website menggunakan HTTPS (disarankan) dan memiliki manifest PWA untuk hasil optimal.
+      </div>
+    </div>
+
+    <button id="buildBtn" class="generate-btn">
+      <i class="fas fa-magic"></i> Bangun APK Sekarang
+    </button>
+
+    <div id="statusContainer" class="status-card" style="display: none;">
+      <div class="status-title">
+        <i id="statusIcon" class="fas fa-hourglass-half"></i>
+        <span id="statusTitle">Memproses</span>
+      </div>
+      <div id="statusMessage" class="status-message">Menyiapkan build environment...</div>
+      <div id="progressWrapper" class="progress-bar">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+    </div>
+
+    <div id="downloadArea" style="display: none;" class="download-area">
+      <div><i class="fas fa-check-circle" style="color:#22c55e;"></i> <strong style="color:#e2e8f0;">APK siap diunduh!</strong></div>
+      <a id="downloadLink" href="#" class="download-link" download><i class="fas fa-download"></i> Unduh APK</a>
+    </div>
+
+    <div class="info-note">
+      <i class="fas fa-shield-alt"></i> Menggunakan teknologi PWABuilder API (Microsoft) — bangun APK berkualitas tinggi dengan WebView. <br>
+      Proses memakan waktu ~10-40 detik tergantung antrian.
+    </div>
+  </div>
+</div>
+
+<script>
+  // PWABuilder API endpoints (dokumentasi resmi)
+  const API_BUILD_URL = 'https://pwabuilder.com/api/build/android';
+  const API_STATUS_URL = 'https://pwabuilder.com/api/build/status/';
+
+  // DOM elements
+  const urlInput = document.getElementById('websiteUrl');
+  const buildBtn = document.getElementById('buildBtn');
+  const statusContainer = document.getElementById('statusContainer');
+  const statusTitleSpan = document.getElementById('statusTitle');
+  const statusMessageSpan = document.getElementById('statusMessage');
+  const statusIcon = document.getElementById('statusIcon');
+  const progressFill = document.getElementById('progressFill');
+  const downloadArea = document.getElementById('downloadArea');
+  const downloadLink = document.getElementById('downloadLink');
+
+  // Helper: reset UI before new build
+  function resetUI() {
+    downloadArea.style.display = 'none';
+    downloadLink.href = '#';
+    statusContainer.style.display = 'block';
+    statusIcon.className = 'fas fa-hourglass-half';
+    statusTitleSpan.innerText = 'Menginisiasi Build';
+    statusMessageSpan.innerText = 'Menghubungi server PWABuilder...';
+    progressFill.style.width = '0%';
+    buildBtn.disabled = true;
+  }
+
+  // Helper: update progress (visual saja)
+  function setProgress(percent, message, title = null) {
+    if (title) statusTitleSpan.innerText = title;
+    if (message) statusMessageSpan.innerText = message;
+    progressFill.style.width = `${Math.min(100, Math.max(0, percent))}%`;
+  }
+
+  // Helper: validasi URL
+  function validateAndFormatUrl(rawUrl) {
+    let url = rawUrl.trim();
+    if (!url) return null;
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      url = 'https://' + url;
+    }
+    try {
+      const parsed = new URL(url);
+      // hanya izinkan http/https
+      if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null;
+      return parsed.href;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // Fungsi utama membangun APK via PWABuilder
+  async function buildApk(websiteUrl) {
+    try {
+      // 1. Kirim request POST untuk memulai build
+      setProgress(10, 'Mengirim permintaan ke API builder...', 'Menginisiasi');
+      const buildResponse = await fetch(API_BUILD_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ url: websiteUrl })
+      });
+
+      if (!buildResponse.ok) {
+        let errorDetail = `HTTP ${buildResponse.status}`;
+        try {
+          const errJson = await buildResponse.json();
+          errorDetail = errJson.message || errJson.error || errorDetail;
+        } catch(e) {}
+        throw new Error(`Gagal memulai build: ${errorDetail}`);
+      }
+
+      const buildData = await buildResponse.json();
+      const taskId = buildData.taskId;
+      if (!taskId) {
+        throw new Error('Respons API tidak mengandung taskId');
+      }
+
+      setProgress(20, `Task ID: ${taskId}. Sedang membangun APK (proses bisa 10-40 detik)...`, 'Membangun APK');
+      
+      // 2. Polling status setiap 3 detik sampai selesai / gagal
+      let isCompleted = false;
+      let attempts = 0;
+      const maxAttempts = 45; // max ~135 detik
+      let downloadUrl = null;
+
+      while (!isCompleted && attempts < maxAttempts) {
+        attempts++;
+        // update progress visual berdasarkan usaha polling (20% -> 90%)
+        const fakeProgress = Math.min(90, 20 + (attempts / maxAttempts) * 70);
+        setProgress(fakeProgress, `Memproses build... (${attempts * 3} detik)`, 'Membangun APK');
+
+        const statusResp = await fetch(`${API_STATUS_URL}${taskId}`, {
+          headers: { 'Accept': 'application/json' }
+        });
+        if (!statusResp.ok) {
+          // jika error polling, tetap lanjut tapi jangan throw dulu
+          await new Promise(resolve => setTimeout(resolve, 3000));
+          continue;
+        }
+        const statusData = await statusResp.json();
+        
+        // statusData: { status: 'pending' | 'complete' | 'error', packageUrl?: string, message?: string }
+        if (statusData.status === 'complete' && statusData.packageUrl) {
+          downloadUrl = statusData.packageUrl;
+          isCompleted = true;
+          break;
+        } else if (statusData.status === 'error') {
+          throw new Error(statusData.message || 'Build gagal dari server PWABuilder');
+        }
+        
+        // masih pending / running, tunggu 3 detik
+        await new Promise(resolve => setTimeout(resolve, 3000));
+      }
+
+      if (!isCompleted || !downloadUrl) {
+        throw new Error('Waktu build habis atau tidak mendapatkan URL APK. Coba lagi nanti.');
+      }
+
+      return downloadUrl;
+    } catch (err) {
+      console.error('Build error:', err);
+      throw err;
+    }
+  }
+
+  // Event handler utama
+  buildBtn.addEventListener('click', async () => {
+    // reset tampilan sebelumnya
+    downloadArea.style.display = 'none';
+    const rawUrl = urlInput.value;
+    const validUrl = validateAndFormatUrl(rawUrl);
+    if (!validUrl) {
+      // tampilkan error sementara di status container
+      statusContainer.style.display = 'block';
+      statusIcon.className = 'fas fa-exclamation-triangle';
+      statusTitleSpan.innerText = 'URL tidak valid';
+      statusMessageSpan.innerHTML = '<span class="error-text">Masukkan URL yang benar (contoh: https://example.com atau example.com)</span>';
+      progressFill.style.width = '0%';
+      setTimeout(() => {
+        if (statusContainer.style.display === 'block' && !buildBtn.disabled) {
+          // setelah 4 detik sembunyikan jika tidak dalam proses build
+          statusContainer.style.display = 'none';
+        }
+      }, 4000);
+      return;
+    }
+
+    // Mulai proses build
+    resetUI();
+    try {
+      const apkDownloadUrl = await buildApk(validUrl);
+      // sukses
+      statusIcon.className = 'fas fa-check-circle';
+      statusTitleSpan.innerText = 'Build Berhasil!';
+      statusMessageSpan.innerHTML = `APK untuk <strong>${escapeHtml(validUrl)}</strong> telah siap. Klik tombol di bawah untuk mengunduh.`;
+      progressFill.style.width = '100%';
+      
+      // Tampilkan area download
+      downloadArea.style.display = 'flex';
+      downloadLink.href = apkDownloadUrl;
+      downloadLink.setAttribute('download', ''); // atribut download mendorong unduh
+      // optional: set nama file
+      const domain = new URL(validUrl).hostname;
+      downloadLink.download = `${domain.replace(/\./g, '_')}_app.apk`;
+      
+      // tambahkan event jika link gagal (misal CORS redirect)
+      downloadLink.onclick = (e) => {
+        // tetap ijinkan, karena APK dihosting di CDN Microsoft
+        console.log('Mengunduh APK dari:', apkDownloadUrl);
+      };
+    } catch (error) {
+      // Tampilkan error dengan jelas
+      statusIcon.className = 'fas fa-times-circle';
+      statusTitleSpan.innerText = 'Gagal membuat APK';
+      let errorMsg = error.message || 'Terjadi kesalahan tak dikenal.';
+      if (errorMsg.includes('fetch') || errorMsg.includes('network')) {
+        errorMsg = 'Gagal terhubung ke API builder. Periksa koneksi internet atau coba lagi.';
+      }
+      statusMessageSpan.innerHTML = `<span class="error-text"><i class="fas fa-bug"></i> ${escapeHtml(errorMsg)}</span><br><span style="font-size:0.8rem;">Tips: Pastikan website bisa diakses publik dan memiliki SSL (HTTPS). Coba reload dalam beberapa saat.</span>`;
+      progressFill.style.width = '0%';
+      // Jangan tampilkan download area
+      downloadArea.style.display = 'none';
+    } finally {
+      buildBtn.disabled = false;
+      // setelah 30 detik, status container tidak otomatis hilang biar user lihat hasil
+      // tapi jika error dan user klik lagi, nanti akan direset.
+    }
+  });
+
+  // helper escape html
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+      return c;
+    });
+  }
+
+  // memberi contoh / placeholder interaksi
+  urlInput.addEventListener('focus', () => {
+    if (urlInput.value === 'https://') {
+      urlInput.value = '';
+    }
+  });
+  urlInput.addEventListener('blur', () => {
+    if (urlInput.value.trim() === '') {
+      urlInput.value = 'https://';
+    }
+  });
+
+  // jika enter ditekan di input
+  urlInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      buildBtn.click();
+    }
+  });
+  
+  // demo hint: set contoh default (opsional tapi tidak merusak)
+  // jika kosong beri contoh menarik
+  if (urlInput.value === 'https://') {
+    // biarkan saja
+  }
+</script>
+</body>
+</html>
