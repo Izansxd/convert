@@ -2,210 +2,173 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Web2App - Ubah Website Jadi APK Android</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web2App Pro - Ubah Website ke APK Android</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at 10% 30%, #0b1120, #0a0f1c);
+      background: linear-gradient(145deg, #0b1120 0%, #0a0f1c 100%);
       min-height: 100vh;
       padding: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-    .glass {
-      max-width: 780px;
-      width: 100%;
-      background: rgba(15, 25, 45, 0.65);
-      backdrop-filter: blur(12px);
-      border-radius: 2rem;
-      border: 1px solid rgba(66, 153, 225, 0.3);
-      box-shadow: 0 25px 40px -12px rgba(0,0,0,0.5);
-      padding: 2rem;
-      transition: all 0.2s;
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
     }
     h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #ffffff, #a78bfa, #3b82f6);
+      font-size: 2.4rem;
+      background: linear-gradient(135deg, #ffffff, #c084fc, #60a5fa);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 0.75rem;
-    }
-    .badge {
-      background: #1e293b;
-      border-radius: 40px;
-      padding: 0.2rem 0.9rem;
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: #94a3b8;
-      border: 1px solid #334155;
+      gap: 0.8rem;
     }
     .sub {
-      color: #9ca3af;
-      margin: 0.5rem 0 1.8rem 0;
-      border-left: 3px solid #8b5cf6;
-      padding-left: 1rem;
+      color: #94a3b8;
+      margin-top: 0.5rem;
     }
-    .input-card {
-      background: rgba(0,0,0,0.35);
-      border-radius: 1.2rem;
-      padding: 0.2rem 0.2rem 0.2rem 1rem;
+    .card {
+      background: rgba(15, 25, 45, 0.7);
+      backdrop-filter: blur(12px);
+      border-radius: 1.5rem;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+    }
+    .url-box {
       display: flex;
-      align-items: center;
-      border: 1px solid #2d3a5e;
-      transition: 0.2s;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
     }
-    .input-card:focus-within {
-      border-color: #8b5cf6;
-      box-shadow: 0 0 0 2px rgba(139,92,246,0.4);
-    }
-    .input-card i { color: #6b7280; font-size: 1.1rem; margin-right: 0.5rem; }
-    input {
-      background: transparent;
-      border: none;
-      padding: 1rem 0;
-      width: 100%;
-      color: #f1f5f9;
+    .url-input {
+      flex: 1;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 1rem;
+      padding: 0.8rem 1.2rem;
+      color: white;
       font-size: 1rem;
       outline: none;
       font-family: monospace;
     }
-    input::placeholder { color: #4b5563; }
-    .hint {
-      font-size: 0.7rem;
-      color: #6b7280;
-      margin-top: 0.5rem;
-      display: flex;
-      gap: 0.6rem;
+    .url-input:focus {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 2px rgba(139,92,246,0.3);
     }
     .btn-primary {
-      width: 100%;
-      background: linear-gradient(95deg, #7c3aed, #2563eb);
+      background: linear-gradient(95deg, #7c3aed, #3b82f6);
       border: none;
-      padding: 1rem;
-      border-radius: 1.5rem;
-      font-weight: 700;
-      font-size: 1rem;
+      padding: 0.8rem 1.8rem;
+      border-radius: 1rem;
+      font-weight: 600;
       color: white;
-      margin-top: 1.8rem;
-      display: flex;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 0.6rem;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+    .btn-secondary {
+      background: #1e293b;
+      border: 1px solid #475569;
+      padding: 0.7rem 1.5rem;
+      border-radius: 1rem;
+      color: #cbd5e1;
       cursor: pointer;
       transition: 0.2s;
     }
-    .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.05); }
-    .btn-primary:disabled { opacity: 0.5; transform: none; cursor: not-allowed; }
-    .status-box {
-      margin-top: 1.8rem;
-      background: #0f172acc;
+    .btn-secondary:hover {
+      background: #334155;
+    }
+    .iframe-wrapper {
+      background: #0f172a;
       border-radius: 1.2rem;
-      padding: 1rem 1.2rem;
-      border-left: 4px solid #3b82f6;
-    }
-    .progress-bar {
-      height: 5px;
-      background: #1e293b;
-      border-radius: 5px;
-      margin-top: 0.8rem;
       overflow: hidden;
+      border: 1px solid #2d3a5e;
+      height: 600px;
     }
-    .progress-fill {
-      width: 0%;
+    iframe {
+      width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, #a855f7, #3b82f6);
-      transition: width 0.2s;
+      border: none;
     }
-    .download-area {
-      margin-top: 1rem;
-      background: #064e3b30;
+    .info {
+      margin-top: 1.5rem;
+      background: #1e293b50;
       border-radius: 1rem;
       padding: 1rem;
-      border: 1px solid #22c55e50;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-    }
-    .btn-download {
-      background: #22c55e;
-      padding: 0.5rem 1.2rem;
-      border-radius: 2rem;
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
       font-size: 0.85rem;
+      color: #9ca3af;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-    .footer-note {
-      font-size: 0.7rem;
-      text-align: center;
-      margin-top: 2rem;
-      color: #5a6e8c;
-      border-top: 1px solid #253449;
-      padding-top: 1rem;
+    .badge {
+      background: #00000030;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2rem;
+      font-size: 0.75rem;
     }
-    .error-text { color: #f87171; }
-    .success-text { color: #4ade80; }
+    @media (max-width: 700px) {
+      .iframe-wrapper { height: 500px; }
+      h1 { font-size: 1.8rem; }
+    }
   </style>
 </head>
 <body>
-<div class="glass">
-  <div style="display: flex; justify-content: space-between; align-items: center;">
-    <h1><i class="fas fa-mobile-alt"></i> Web2App</h1>
-    <span class="badge"><i class="fab fa-android"></i> PWABuilder</span>
-  </div>
-  <div class="sub">
-    Konversi website favoritmu menjadi <strong>APK Android</strong> instan. Masukkan URL, klik build, unduh aplikasi.
+<div class="container">
+  <div class="header">
+    <h1><i class="fab fa-android"></i> Web2App Pro</h1>
+    <div class="sub">Ubah website favoritmu menjadi aplikasi Android (.apk) secara instan</div>
   </div>
 
-  <label style="font-weight: 500; color:#cbd5e6;"><i class="fas fa-link"></i> Alamat website</label>
-  <div class="input-card">
-    <i class="fas fa-globe"></i>
-    <input type="text" id="siteUrl" placeholder="https://namasitus.com atau contoh.com" value="https://siwostore.vercel.app/">
-  </div>
-  <div class="hint">
-    <span><i class="fas fa-shield-alt"></i> HTTPS disarankan</span>
-    <span><i class="fas fa-check-circle"></i> Harus memiliki manifest PWA untuk hasil optimal</span>
-  </div>
-
-  <button id="buildBtn" class="btn-primary"><i class="fas fa-cogs"></i> Bangun APK Sekarang</button>
-
-  <div id="statusPanel" style="display: none;" class="status-box">
-    <div id="statusIconText"><i class="fas fa-spinner fa-pulse"></i> <span id="statusTitle">Memulai build...</span></div>
-    <div id="statusMsg" style="font-size: 0.85rem; margin-top: 6px;">Menghubungi server PWABuilder</div>
-    <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+  <div class="card">
+    <div class="url-box">
+      <input type="text" id="websiteUrl" class="url-input" placeholder="Masukkan URL website (contoh: https://siwostore.vercel.app)" value="https://siwostore.vercel.app">
+      <button id="loadPwaBuilderBtn" class="btn-primary"><i class="fas fa-magic"></i> Buka Generator APK</button>
+    </div>
+    <div style="font-size: 0.8rem; color: #6b7280; margin-top: -0.5rem;">
+      <i class="fas fa-info-circle"></i> Klik tombol di atas, lalu di dalam PWABuilder pilih <strong>Android</strong> → <strong>Generate APK</strong>
+    </div>
   </div>
 
-  <div id="downloadPanel" style="display: none;" class="download-area">
-    <div><i class="fas fa-check-circle" style="color:#4ade80;"></i> <strong style="color:white;">APK siap!</strong></div>
-    <a id="downloadApkLink" href="#" class="btn-download" download><i class="fas fa-download"></i> Unduh APK</a>
+  <div class="iframe-wrapper">
+    <iframe id="pwabuilderFrame" src="https://pwabuilder.com/"></iframe>
   </div>
 
-  <div class="footer-note">
-    ⚡ Menggunakan <strong>PWABuilder API resmi (Microsoft)</strong> — aman dan terpercaya.<br>
-    Jika build gagal, pastikan website memiliki manifest.json dan dapat diakses publik.
+  <div class="info">
+    <span><i class="fas fa-check-circle"></i> 100% Gratis</span>
+    <span><i class="fas fa-shield-alt"></i> Menggunakan PWABuilder resmi (Microsoft)</span>
+    <span><i class="fas fa-download"></i> Hasil APK siap instal di Android</span>
+  </div>
+  <div class="info" style="justify-content: center;">
+    <span class="badge"><i class="fab fa-chrome"></i> Cara pakai: Masukkan URL → Klik tombol → Di frame bawah, klik "Start" → Pilih Android → Generate</span>
   </div>
 </div>
 
 <script>
-  const urlInput = document.getElementById('siteUrl');
-  const buildBtn = document.getElementById('buildBtn');
-  const statusPanel = document.getElementById('statusPanel');
-  const statusTitleSpan = document.getElementById('statusTitle');
-  const statusMsgDiv = document.getElementById('statusMsg');
-  const progressFill = document.getElementById('progressFill');
-  const downloadPanel = document.getElementById('downloadPanel');
-  const downloadLink = document.getElementById('downloadApkLink');
+  const urlInput = document.getElementById('websiteUrl');
+  const loadBtn = document.getElementById('loadPwaBuilderBtn');
+  const iframe = document.getElementById('pwabuilderFrame');
 
   function normalizeUrl(raw) {
     let url = raw.trim();
@@ -214,175 +177,37 @@
       url = 'https://' + url;
     }
     try {
-      const parsed = new URL(url);
-      if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null;
-      return parsed.href;
+      new URL(url);
+      return url;
     } catch(e) {
       return null;
     }
   }
 
-  function setProgress(percent, message, title = null) {
-    if (title) statusTitleSpan.innerText = title;
-    if (message) statusMsgDiv.innerHTML = message;
-    progressFill.style.width = Math.min(100, Math.max(0, percent)) + '%';
-  }
-
-  // PWA Manifest check (optional tapi membantu user)
-  async function checkPwaManifest(siteUrl) {
-    try {
-      const baseUrl = new URL(siteUrl);
-      const manifestUrl = new URL('/manifest.json', baseUrl.origin).href;
-      const res = await fetch(manifestUrl, { mode: 'cors', cache: 'no-cache' });
-      if (res.ok) return true;
-      // coba cari di html
-      const htmlResp = await fetch(siteUrl);
-      const html = await htmlResp.text();
-      const match = html.match(/<link rel="manifest" href="([^"]+)"/i);
-      if (match) return true;
-      return false;
-    } catch(e) {
-      return false;
-    }
-  }
-
-  // Fungsi build APK menggunakan PWABuilder API (endpoint terbaru yang mendukung CORS)
-  async function buildApkWithPwabuilder(websiteUrl) {
-    // Endpoint resmi PWABuilder untuk generate Android APK
-    const API_URL = 'https://pwabuilder.com/api/build/android';
-    
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({ url: websiteUrl })
-    });
-
-    if (!response.ok) {
-      let errMsg = `HTTP ${response.status}`;
-      try {
-        const errorData = await response.json();
-        errMsg = errorData.message || errorData.error || errMsg;
-      } catch(e) {}
-      throw new Error(`Gagal memulai build: ${errMsg}`);
-    }
-
-    const data = await response.json();
-    const taskId = data.taskId;
-    if (!taskId) throw new Error('Tidak mendapatkan taskId dari API');
-
-    // Polling status
-    let attempts = 0;
-    const maxAttempts = 35; // ~ 105 detik
-    let downloadUrl = null;
-
-    while (attempts < maxAttempts) {
-      attempts++;
-      const progressPercent = 20 + Math.min(70, (attempts / maxAttempts) * 70);
-      setProgress(progressPercent, `Memproses build (${attempts*3} detik)...`, 'Membangun APK');
-
-      const statusResp = await fetch(`https://pwabuilder.com/api/build/status/${taskId}`, {
-        headers: { 'Accept': 'application/json' }
-      });
-      if (!statusResp.ok) {
-        await new Promise(r => setTimeout(r, 3000));
-        continue;
-      }
-      const statusData = await statusResp.json();
-      
-      if (statusData.status === 'complete' && statusData.packageUrl) {
-        downloadUrl = statusData.packageUrl;
-        break;
-      } else if (statusData.status === 'error') {
-        throw new Error(statusData.message || 'Build gagal dari server');
-      }
-      await new Promise(r => setTimeout(r, 3000));
-    }
-
-    if (!downloadUrl) throw new Error('Waktu habis, coba lagi nanti.');
-    return downloadUrl;
-  }
-
-  // Fallback: membuka PWABuilder official di tab baru jika API gagal karena CORS/block
-  function fallbackToPwabuilderDirect(url) {
-    const encoded = encodeURIComponent(url);
-    const pwabuilderUrl = `https://pwabuilder.com/?url=${encoded}#android`;
-    window.open(pwabuilderUrl, '_blank');
-    statusMsgDiv.innerHTML = `⚠️ Karena kendala teknis, kami membuka <strong>PWABuilder resmi</strong> di tab baru. <br> Klik "Build" dan pilih Android untuk dapatkan APK.`;
-    setProgress(0, 'Mengarahkan ke PWABuilder...', 'Membuka tab bantuan');
-    setTimeout(() => {
-      statusPanel.style.display = 'none';
-    }, 5000);
-  }
-
-  buildBtn.addEventListener('click', async () => {
-    // Reset tampilan
-    downloadPanel.style.display = 'none';
-    statusPanel.style.display = 'block';
-    buildBtn.disabled = true;
-    setProgress(5, 'Memeriksa URL...', 'Validasi');
-
-    const rawUrl = urlInput.value;
-    const validUrl = normalizeUrl(rawUrl);
-    if (!validUrl) {
-      statusMsgDiv.innerHTML = '<span class="error-text"><i class="fas fa-exclamation-triangle"></i> URL tidak valid. Gunakan format seperti https://contoh.com</span>';
-      setProgress(0, '', 'Gagal');
-      buildBtn.disabled = false;
-      setTimeout(() => { if(statusPanel.style.display !== 'none') statusPanel.style.display = 'none'; }, 4000);
+  loadBtn.addEventListener('click', () => {
+    let siteUrl = urlInput.value.trim();
+    if (!siteUrl) {
+      alert('Masukkan URL website terlebih dahulu!');
       return;
     }
-
-    // Cek manifest PWA (hanya peringatan)
-    try {
-      const hasManifest = await checkPwaManifest(validUrl);
-      if (!hasManifest) {
-        statusMsgDiv.innerHTML = `<span class="error-text"><i class="fas fa-info-circle"></i> Peringatan: Website tidak memiliki manifest PWA. APK tetap bisa dibuat, tetapi mungkin tidak maksimal.</span>`;
-        await new Promise(r => setTimeout(r, 1500));
-      }
-    } catch(e) {}
-
-    setProgress(10, 'Menghubungi PWABuilder API...', 'Mengirim permintaan');
-    try {
-      const apkUrl = await buildApkWithPwabuilder(validUrl);
-      // Sukses
-      setProgress(100, 'APK berhasil dibuat!', '✅ Build sukses');
-      statusMsgDiv.innerHTML = `<span class="success-text"><i class="fas fa-check-circle"></i> APK untuk <strong>${escapeHtml(validUrl)}</strong> siap diunduh.</span>`;
-      
-      downloadPanel.style.display = 'flex';
-      downloadLink.href = apkUrl;
-      const domain = new URL(validUrl).hostname;
-      downloadLink.download = `${domain.replace(/\./g, '_')}_app.apk`;
-    } catch (error) {
-      console.error('Build error:', error);
-      // Jika error karena CORS / network, kita tawarkan fallback ke PWABuilder langsung
-      if (error.message.includes('fetch') || error.message.includes('Failed to fetch') || error.message.includes('CORS')) {
-        statusMsgDiv.innerHTML = `<span class="error-text"><i class="fas fa-plug"></i> Gagal terhubung ke API builder (CORS/Network).</span><br>Mengalihkan ke PWABuilder resmi...`;
-        setProgress(50, 'Mencoba metode alternatif...', 'Koneksi terkendala');
-        fallbackToPwabuilderDirect(validUrl);
-      } else {
-        statusMsgDiv.innerHTML = `<span class="error-text"><i class="fas fa-bug"></i> ${escapeHtml(error.message)}</span><br>Pastikan website publik dan memiliki manifest.json yang valid.`;
-        setProgress(0, '', 'Gagal membuat APK');
-      }
-    } finally {
-      buildBtn.disabled = false;
-      // status panel tetap terlihat untuk hasil
+    const validUrl = normalizeUrl(siteUrl);
+    if (!validUrl) {
+      alert('URL tidak valid. Gunakan format seperti https://contoh.com');
+      return;
     }
+    // Buka PWABuilder dengan query parameter url agar langsung terisi
+    const pwaBuilderUrl = `https://pwabuilder.com/?url=${encodeURIComponent(validUrl)}`;
+    iframe.src = pwaBuilderUrl;
   });
 
-  function escapeHtml(str) {
-    return str.replace(/[&<>]/g, function(m) {
-      if (m === '&') return '&amp;';
-      if (m === '<') return '&lt;';
-      if (m === '>') return '&gt;';
-      return m;
-    });
-  }
-
-  // Enter key trigger
-  urlInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') buildBtn.click();
+  // Optional: set default iframe ke URL yang sudah diisi
+  window.addEventListener('load', () => {
+    if (urlInput.value) {
+      const defaultUrl = normalizeUrl(urlInput.value);
+      if (defaultUrl) {
+        iframe.src = `https://pwabuilder.com/?url=${encodeURIComponent(defaultUrl)}`;
+      }
+    }
   });
 </script>
 </body>
